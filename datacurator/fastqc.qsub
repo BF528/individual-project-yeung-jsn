@@ -1,0 +1,54 @@
+#!/bin/bash
+
+#$ -P bf528
+#$ -cwd
+
+source /etc/bashrc
+
+module load python3/3.7.9
+module load fastqc
+
+#SRR1177966
+fastqc zcat /projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177966_1.fastq.gz \
+/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177966_2.fastq.gz \
+--outdir=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastqc_output/FASTQC_SRR1177966/
+
+#SRR1177969
+fastqc zcat /projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177969_1.fastq.gz \
+/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177969_2.fastq.gz \
+--outdir=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastqc_output/FASTQC_SRR1177969/
+
+#SRR1177970
+fastqc zcat /projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177970_1.fastq.gz \
+/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177970_2.fastq.gz \
+--outdir=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastqc_output/FASTQC_SRR1177970/
+
+#SRR1177993
+fastqc zcat /projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177993_1.fastq.gz \
+/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177993_2.fastq.gz \
+--outdir=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastqc_output/FASTQC_SRR1177993/
+
+#SRR1177994
+fastqc zcat /projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177994_1.fastq.gz \
+/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177994_2.fastq.gz \
+--outdir=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastqc_output/FASTQC_SRR1177994/
+
+#SRR1177995
+fastqc zcat /projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177995_1.fastq.gz \
+/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177995_2.fastq.gz \
+--outdir=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastqc_output/FASTQC_SRR1177995/
+
+#SRR1177998
+fastqc zcat /projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177998_1.fastq.gz \
+/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1177998_2.fastq.gz \
+--outdir=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastqc_output/FASTQC_SRR1177998/
+
+#SRR1178001
+fastqc zcat /projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1178001_1.fastq.gz \
+/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1178001_2.fastq.gz \
+--outdir=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastqc_output/FASTQC_SRR1178001/
+
+#SRR1178003
+fastqc zcat /projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1178003_1.fastq.gz \
+/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastq/SRR1178003_2.fastq.gz \
+--outdir=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/fastqc_output/FASTQC_SRR1178003/

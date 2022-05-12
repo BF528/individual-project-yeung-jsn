@@ -1,0 +1,152 @@
+---
+title: "deseq.Rmd"
+author: "Jason Yeung"
+---
+
+```{r}
+library(dplyr)
+library(tidyverse)
+library(DESeq2)
+library(ggplot2)
+```
+
+```{r}
+# read in metadata
+metadata <- read_csv("/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/toxgroup_2_rna_info.csv")
+control_metadata <- metadata %>% filter(mode_of_action == "Control")
+
+# read in counts
+counts_df <- read_csv("./all_counts.txt")
+```
+
+```{r}
+# read in control counts and merge with treatment counts df
+control_counts_df <- read_csv("./control_counts.csv") %>%
+  select(control_metadata[[1]])
+
+all_counts <- cbind(counts_df, control_counts_df)
+rownames(all_counts) <- all_counts[, 1]
+all_counts <- all_counts[, -1]
+```
+
+```{r}
+# filter metadata by treatment and respective control groups
+naph <- metadata %>% filter(mode_of_action == "AhR" | mode_of_action == "Control" & vehicle == "CMC_.5_%")
+econ <- metadata %>% filter(mode_of_action == "CAR/PXR" | mode_of_action == "Control" & vehicle == "CORN_OIL_100_%")
+thio <- metadata %>% filter(mode_of_action == "Cytotoxic" | mode_of_action == "Control" & vehicle == "SALINE_100_%")
+```
+
+```{r}
+# DESeq
+# naph dds object
+naph_dds <- DESeqDataSetFromMatrix(
+  countData = all_counts %>% select(naph[[1]]),
+  colData = naph,
+  design = ~ mode_of_action
+)
+
+# econ dds object
+econ_dds <- DESeqDataSetFromMatrix(
+  countData = all_counts %>% select(econ[[1]]),
+  colData = econ,
+  design =  ~ mode_of_action
+)
+
+
+# thio dds object
+thio_dds <- DESeqDataSetFromMatrix(
+  countData = all_counts %>% select(thio[[1]]),
+  colData = thio,
+  design = ~ mode_of_action
+)
+```
+
+```{r}
+# relevel
+naph_dds$mode_of_action <- relevel(naph_dds$mode_of_action, ref = "Control")
+econ_dds$mode_of_action <- relevel(econ_dds$mode_of_action, ref = "Control")
+thio_dds$mode_of_action <- relevel(thio_dds$mode_of_action, ref = "Control")
+```
+
+```{r}
+# run deseq
+naph_deseq <- DESeq(naph_dds)
+econ_deseq <- DESeq(econ_dds)
+thio_deseq <- DESeq(thio_dds)
+```
+
+```{r}
+# write results to csv
+naph_deseq_res <- results(naph_deseq)
+econ_deseq_res <- results(econ_deseq)
+thio_deseq_res <- results(thio_deseq)
+
+write.csv(naph_deseq_res, file = "./deseq_results/naph_deseq_results.csv")
+write.csv(econ_deseq_res, file = "./deseq_results/econ_deseq_results.csv")
+write.csv(thio_deseq_res, file = "./deseq_results/thio_deseq_results.csv")
+```
+
+```{r}
+# visualizing deseq results
+naph_results <- read_csv("./deseq_results/naph_deseq_results.csv")
+econ_results <- read.csv("./deseq_results/econ_deseq_results.csv")
+thio_results <- read.csv("./deseq_results/thio_deseq_results.csv")
+
+# number of genes with padj < 0.05
+naph_results %>% filter(padj < 0.05) %>% summarize(count = n())
+econ_results %>% filter(padj < 0.05) %>% summarize(count = n())
+thio_results %>% filter(padj < 0.05) %>% summarize(count = n())
+```
+```{r}
+# top 10 DE genes for each treatment group
+top10_naph <- naph_results %>% top_n(-10, padj)
+top10_econ <- econ_results %>% top_n(-10, padj)
+top10_thio <- thio_results %>% top_n(-10, padj)
+```
+
+```{r}
+naph_results %>%
+  filter(padj < 0.05) %>%
+  ggplot(mapping = aes(x = log2FoldChange)) +
+  geom_histogram(col = "darkseagreen", fill = "darkseagreen") +
+  labs(title = "LogFC for beta-Naphthoflavone Group", x = "Log2FC") +
+  theme_bw()
+
+econ_results %>%
+  filter(padj < 0.05) %>%
+  ggplot(mapping = aes(x = log2FoldChange)) +
+  geom_histogram(col = "coral2", fill = "coral2") +
+  labs(title = "LogFC for Econazole Group", x = "Log2FC") +
+  theme_bw()
+
+thio_results %>%
+  filter(padj < 0.05) %>%
+  ggplot(mapping = aes(x = log2FoldChange)) +
+  geom_histogram(col = "cadetblue", fill = "cadetblue") +
+  labs(title = "LogFC for Thioacetamide Group", x = "Log2FC") +
+  theme_bw()
+```
+```{r}
+# scatter plots
+naph_results %>%
+  filter(padj < 0.05) %>%
+  ggplot(mapping = aes(x = log2FoldChange, y = -log10(pvalue))) +
+  geom_point(col = "darkseagreen") +
+  labs(title = "LogFC vs Nominal PValue for beta-Naphthoflavone Group") +
+  theme_bw()
+
+econ_results %>%
+  filter(padj < 0.05) %>%
+  ggplot(mapping = aes(x = log2FoldChange, y = -log10(pvalue))) +
+  geom_point(col = "coral2") +
+  labs(title = "LogFC vs Nominal PValue for Econazole Group") +
+  theme_bw()
+
+thio_results %>%
+  filter(padj < 0.05) %>%
+  ggplot(mapping = aes(x = log2FoldChange, y = -log10(pvalue))) +
+  geom_point(col = "cadetblue") +
+  labs(title = "LogFC vs Nominal PValue for Thioacetamide Group") +
+  theme_bw()
+
+```

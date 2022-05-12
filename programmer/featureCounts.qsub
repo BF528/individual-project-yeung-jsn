@@ -1,0 +1,63 @@
+#!/bin/bash
+
+#$ -P bf528
+#$ -cwd
+#$ -pe omp 16
+
+source /etc/bashrc
+
+module load subread
+
+# SRR1177966
+FILE=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/STAR_output/STAR_SRR1177966/Aligned.sortedByCoord.out.bam
+GTF=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/rn4_refGene_20180308.gtf
+OUT=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/counts_files/SRR1177966_counts.txt
+featureCounts -T 16 -a $GTF -o $OUT $FILE
+
+# SRR1177969
+FILE=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/STAR_output/STAR_SRR1177969/Aligned.sortedByCoord.out.bam
+GTF=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/rn4_refGene_20180308.gtf
+OUT=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/counts_files/SRR1177969_counts.txt
+featureCounts -T 16 -a $GTF -o $OUT $FILE
+
+# SRR1177970
+FILE=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/STAR_output/STAR_SRR1177970/Aligned.sortedByCoord.out.bam
+GTF=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/rn4_refGene_20180308.gtf
+OUT=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/counts_files/SRR1177970_counts.txt
+featureCounts -T 16 -a $GTF -o $OUT $FILE
+
+# SRR1177993
+FILE=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/STAR_output/STAR_SRR1177993/Aligned.sortedByCoord.out.bam
+GTF=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/rn4_refGene_20180308.gtf
+OUT=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/counts_files/SRR1177993_counts.txt
+featureCounts -T 16 -a $GTF -o $OUT $FILE
+
+# SRR1177994
+FILE=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/STAR_output/STAR_SRR1177994/Aligned.sortedByCoord.out.bam
+GTF=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/rn4_refGene_20180308.gtf
+OUT=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/counts_files/SRR1177994_counts.txt
+featureCounts -T 16 -a $GTF -o $OUT $FILE
+
+# SRR1177995
+FILE=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/STAR_output/STAR_SRR1177995/Aligned.sortedByCoord.out.bam
+GTF=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/rn4_refGene_20180308.gtf
+OUT=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/counts_files/SRR1177995_counts.txt
+featureCounts -T 16 -a $GTF -o $OUT $FILE
+
+# SRR1177998
+FILE=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/STAR_output/STAR_SRR1177998/Aligned.sortedByCoord.out.bam
+GTF=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/rn4_refGene_20180308.gtf
+OUT=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/counts_files/SRR1177998_counts.txt
+featureCounts -T 16 -a $GTF -o $OUT $FILE
+
+# SRR11778001
+FILE=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/STAR_output/STAR_SRR1178001/Aligned.sortedByCoord.out.bam
+GTF=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/rn4_refGene_20180308.gtf
+OUT=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/counts_files/SRR1178001_counts.txt
+featureCounts -T 16 -a $GTF -o $OUT $FILE
+
+# SRR1178003
+FILE=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/datacurator/STAR_output/STAR_SRR1178003/Aligned.sortedByCoord.out.bam
+GTF=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/rn4_refGene_20180308.gtf
+OUT=/projectnb/bf528/students/jy357/project-3-im-not-dead-yet/programmer/counts_files/SRR1178003_counts.txt
+featureCounts -T 16 -a $GTF -o $OUT $FILE

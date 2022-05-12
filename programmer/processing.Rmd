@@ -1,0 +1,82 @@
+---
+title: "featureCounts Processing"
+author: "Jason Yeung"
+---
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(tidyverse)
+```
+
+```{r}
+# Reading counts files
+
+SRR1177966 <- read.table("./counts_files/SRR1177966_counts.txt", header = TRUE) %>%
+  rename(SRR1177966 = 7) %>%
+  rename(gene_id = 1) %>%
+  select(c("gene_id", "SRR1177966"))
+
+SRR1177969 <- read.table("./counts_files/SRR1177969_counts.txt", header = TRUE) %>%
+  rename(SRR1177969 = 7) %>%
+  rename(gene_id = 1) %>%
+  select(c("gene_id", "SRR1177969"))
+
+SRR1177970 <- read.table("./counts_files/SRR1177970_counts.txt", header = TRUE) %>%
+  rename(SRR1177970 = 7) %>%
+  rename(gene_id = 1) %>%
+  select(c("gene_id", "SRR1177970"))
+
+SRR1177993 <- read.table("./counts_files/SRR1177993_counts.txt", header = TRUE) %>%
+  rename(SRR1177993 = 7) %>%
+  rename(gene_id = 1) %>%
+  select(c("gene_id", "SRR1177993"))
+
+SRR1177994 <- read.table("./counts_files/SRR1177994_counts.txt", header = TRUE) %>%
+  rename(SRR1177994 = 7) %>%
+  rename(gene_id = 1) %>%
+  select(c("gene_id", "SRR1177994"))
+
+SRR1177995 <- read.table("./counts_files/SRR1177995_counts.txt", header = TRUE) %>%
+  rename(SRR1177995 = 7) %>%
+  rename(gene_id = 1) %>%
+  select(c("gene_id", "SRR1177995"))
+
+SRR1177998 <- read.table("./counts_files/SRR1177998_counts.txt", header = TRUE) %>%
+  rename(SRR1177998 = 7) %>%
+  rename(gene_id = 1) %>%
+  select(c("gene_id", "SRR1177998"))
+
+SRR1178001 <- read.table("./counts_files/SRR1178001_counts.txt", header = TRUE) %>%
+  rename(SRR1178001 = 7) %>%
+  rename(gene_id = 1) %>%
+  select(c("gene_id", "SRR1178001"))
+
+SRR1178003 <- read.table("./counts_files/SRR1178003_counts.txt", header = TRUE) %>%
+  rename(SRR1178003 = 7) %>%
+  rename(gene_id = 1) %>%
+  select(c("gene_id", "SRR1178003"))
+```
+
+```{r}
+# Merge counts tables
+table_list <- list(SRR1177966, SRR1177969, SRR1177970, SRR1177993, SRR1177994, SRR1177995, SRR1177998, SRR1178001, SRR1178003)
+
+counts_df <- table_list %>%
+  reduce(full_join, by="gene_id")
+```
+
+```{r}
+# reshape and plot boxplots
+counts_df %>%
+  pivot_longer(!gene_id, names_to = "sample", values_to = "count") %>%
+  ggplot(aes(x=sample, y=log10(count))) +
+  geom_boxplot() +
+  labs(title = "Count Distributions") +
+  theme(axis.text.x = element_text(angle = 90))
+
+```
+```{r}
+# write counts file
+write_delim(counts_df, file="./all_counts.txt", delim = ",")
+```
