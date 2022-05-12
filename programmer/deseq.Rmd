@@ -108,21 +108,21 @@ top10_thio <- thio_results %>% top_n(-10, padj)
 naph_results %>%
   filter(padj < 0.05) %>%
   ggplot(mapping = aes(x = log2FoldChange)) +
-  geom_histogram(col = "darkseagreen", fill = "darkseagreen") +
+  geom_histogram(col = "darkgreen", fill = "darkseagreen", bins = 50) +
   labs(title = "LogFC for beta-Naphthoflavone Group", x = "Log2FC") +
   theme_bw()
 
 econ_results %>%
   filter(padj < 0.05) %>%
   ggplot(mapping = aes(x = log2FoldChange)) +
-  geom_histogram(col = "coral2", fill = "coral2") +
+  geom_histogram(col = "chocolate4", fill = "coral2", bins = 50) +
   labs(title = "LogFC for Econazole Group", x = "Log2FC") +
   theme_bw()
 
 thio_results %>%
   filter(padj < 0.05) %>%
   ggplot(mapping = aes(x = log2FoldChange)) +
-  geom_histogram(col = "cadetblue", fill = "cadetblue") +
+  geom_histogram(col = "dodgerblue4", fill = "cadetblue", bins = 50) +
   labs(title = "LogFC for Thioacetamide Group", x = "Log2FC") +
   theme_bw()
 ```

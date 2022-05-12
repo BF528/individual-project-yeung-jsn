@@ -7,54 +7,55 @@ author: "Jason Yeung"
 library(dplyr)
 library(ggplot2)
 library(tidyverse)
+library(purrr)
 ```
 
 ```{r}
 # Reading counts files
 
 SRR1177966 <- read.table("./counts_files/SRR1177966_counts.txt", header = TRUE) %>%
-  rename(SRR1177966 = 7) %>%
-  rename(gene_id = 1) %>%
+  dplyr::rename(SRR1177966 = 7) %>%
+  dplyr::rename(gene_id = 1) %>%
   select(c("gene_id", "SRR1177966"))
 
 SRR1177969 <- read.table("./counts_files/SRR1177969_counts.txt", header = TRUE) %>%
-  rename(SRR1177969 = 7) %>%
-  rename(gene_id = 1) %>%
+  dplyr::rename(SRR1177969 = 7) %>%
+  dplyr::rename(gene_id = 1) %>%
   select(c("gene_id", "SRR1177969"))
 
 SRR1177970 <- read.table("./counts_files/SRR1177970_counts.txt", header = TRUE) %>%
-  rename(SRR1177970 = 7) %>%
-  rename(gene_id = 1) %>%
+  dplyr::rename(SRR1177970 = 7) %>%
+  dplyr::rename(gene_id = 1) %>%
   select(c("gene_id", "SRR1177970"))
 
 SRR1177993 <- read.table("./counts_files/SRR1177993_counts.txt", header = TRUE) %>%
-  rename(SRR1177993 = 7) %>%
-  rename(gene_id = 1) %>%
+  dplyr::rename(SRR1177993 = 7) %>%
+  dplyr::rename(gene_id = 1) %>%
   select(c("gene_id", "SRR1177993"))
 
 SRR1177994 <- read.table("./counts_files/SRR1177994_counts.txt", header = TRUE) %>%
-  rename(SRR1177994 = 7) %>%
-  rename(gene_id = 1) %>%
+  dplyr::rename(SRR1177994 = 7) %>%
+  dplyr::rename(gene_id = 1) %>%
   select(c("gene_id", "SRR1177994"))
 
 SRR1177995 <- read.table("./counts_files/SRR1177995_counts.txt", header = TRUE) %>%
-  rename(SRR1177995 = 7) %>%
-  rename(gene_id = 1) %>%
+  dplyr::rename(SRR1177995 = 7) %>%
+  dplyr::rename(gene_id = 1) %>%
   select(c("gene_id", "SRR1177995"))
 
 SRR1177998 <- read.table("./counts_files/SRR1177998_counts.txt", header = TRUE) %>%
-  rename(SRR1177998 = 7) %>%
-  rename(gene_id = 1) %>%
+  dplyr::rename(SRR1177998 = 7) %>%
+  dplyr::rename(gene_id = 1) %>%
   select(c("gene_id", "SRR1177998"))
 
 SRR1178001 <- read.table("./counts_files/SRR1178001_counts.txt", header = TRUE) %>%
-  rename(SRR1178001 = 7) %>%
-  rename(gene_id = 1) %>%
+  dplyr::rename(SRR1178001 = 7) %>%
+  dplyr::rename(gene_id = 1) %>%
   select(c("gene_id", "SRR1178001"))
 
 SRR1178003 <- read.table("./counts_files/SRR1178003_counts.txt", header = TRUE) %>%
-  rename(SRR1178003 = 7) %>%
-  rename(gene_id = 1) %>%
+  dplyr::rename(SRR1178003 = 7) %>%
+  dplyr::rename(gene_id = 1) %>%
   select(c("gene_id", "SRR1178003"))
 ```
 
@@ -63,7 +64,7 @@ SRR1178003 <- read.table("./counts_files/SRR1178003_counts.txt", header = TRUE) 
 table_list <- list(SRR1177966, SRR1177969, SRR1177970, SRR1177993, SRR1177994, SRR1177995, SRR1177998, SRR1178001, SRR1178003)
 
 counts_df <- table_list %>%
-  reduce(full_join, by="gene_id")
+  purrr::reduce(full_join, by="gene_id")
 ```
 
 ```{r}
